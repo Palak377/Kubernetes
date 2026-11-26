@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="100%" height="100%" style="background-color:#0f172a;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <defs>
+    <marker id="arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-dotted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#020617" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Subtle Grid Background -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+  </pattern>
+  <rect width="1100" height="680" fill="url(#grid)" />
+
+  <!-- Title -->
+  <text x="550" y="55" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700" letter-spacing="0.5">
+    Deploying <tspan fill="#38bdf8">MongoDB &amp; Mongo Express</tspan> with Kubernetes
+  </text>
+  <line x1="310" y1="70" x2="790" y2="70" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Kubernetes Cluster Outer Boundary -->
+  <rect x="60" y="105" width="980" height="530" rx="18" fill="#1e293b" fill-opacity="0.45" stroke="#334155" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="85" y="91" width="195" height="28" rx="6" fill="#0284c7"/>
+  <text x="182" y="110" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700" letter-spacing="0.8">MINIKUBE CLUSTER</text>
+
+  <!-- Browser / User Access Box -->
+  <g filter="url(#shadow)">
+    <rect x="415" y="135" width="230" height="62" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="530" y="162" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Browser / Web UI</text>
+    <text x="530" y="182" text-anchor="middle" fill="#38bdf8" font-size="12" font-family="monospace">http://127.0.0.1:&lt;port&gt;</text>
+  </g>
+
+  <!-- Arrow Browser -> External Service -->
+  <line x1="530" y1="197" x2="530" y2="238" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-dotted)"/>
+
+  <!-- External Service (NodePort) -->
+  <g filter="url(#shadow)">
+    <rect x="425" y="246" width="210" height="54" rx="27" fill="#0d9488"/>
+    <text x="530" y="270" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">External Service</text>
+    <text x="530" y="288" text-anchor="middle" fill="#ccfbf1" font-size="11.5">NodePort : 30000 &#8594; 8081</text>
+  </g>
+
+  <!-- Internal Service (ClusterIP) -->
+  <g filter="url(#shadow)">
+    <rect x="135" y="246" width="210" height="54" rx="27" fill="#0d9488"/>
+    <text x="240" y="270" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">Internal Service</text>
+    <text x="240" y="288" text-anchor="middle" fill="#ccfbf1" font-size="11.5">mongodb-service : 27017</text>
+  </g>
+
+  <!-- Dotted Line External Service -> Internal Service -->
+  <line x1="425" y1="273" x2="355" y2="273" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5 5" marker-end="url(#arrow-dotted)"/>
+
+  <!-- Pod 1: MongoDB -->
+  <g filter="url(#shadow)">
+    <rect x="120" y="325" width="240" height="145" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="240" y="352" text-anchor="middle" fill="#334155" font-size="15" font-weight="700">Pod 1 (mongodb-deployment)</text>
+    <rect x="145" y="370" width="190" height="76" rx="38" fill="#15803d"/>
+    <text x="240" y="405" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">MongoDB</text>
+    <text x="240" y="427" text-anchor="middle" fill="#dcfce7" font-size="12" font-family="monospace">Port: 27017</text>
+  </g>
+
+  <!-- Connector Internal Service -> Pod 1 -->
+  <line x1="240" y1="300" x2="240" y2="325" stroke="#0d9488" stroke-width="3"/>
+
+  <!-- Pod 2: Mongo Express -->
+  <g filter="url(#shadow)">
+    <rect x="410" y="325" width="240" height="145" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="530" y="352" text-anchor="middle" fill="#334155" font-size="15" font-weight="700">Pod 2 (mongo-express)</text>
+    <rect x="435" y="370" width="190" height="76" rx="38" fill="#1d4ed8"/>
+    <text x="530" y="405" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">Mongo Express</text>
+    <text x="530" y="427" text-anchor="middle" fill="#dbeafe" font-size="12" font-family="monospace">Port: 8081</text>
+  </g>
+
+  <!-- Connector External Service -> Pod 2 -->
+  <line x1="530" y1="300" x2="530" y2="325" stroke="#0d9488" stroke-width="3"/>
+
+  <!-- ConfigMap -->
+  <g filter="url(#shadow)">
+    <rect x="720" y="315" width="280" height="110" rx="22" fill="#c2410c"/>
+    <text x="860" y="352" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">ConfigMap</text>
+    <text x="860" y="375" text-anchor="middle" fill="#fed7aa" font-size="12.5" font-weight="600">mongodb-configmap</text>
+    <rect x="742" y="388" width="236" height="26" rx="6" fill="#9a3412"/>
+    <text x="860" y="405" text-anchor="middle" fill="#ffedd5" font-size="12.5" font-family="monospace">database-url = mongodb-service</text>
+  </g>
+
+  <!-- Secret -->
+  <g filter="url(#shadow)">
+    <rect x="720" y="475" width="280" height="130" rx="22" fill="#b45309"/>
+    <text x="860" y="510" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">Secret</text>
+    <text x="860" y="532" text-anchor="middle" fill="#fde68a" font-size="12.5" font-weight="600">mongodb-secret</text>
+    <rect x="742" y="544" width="236" height="48" rx="6" fill="#78350f"/>
+    <text x="860" y="563" text-anchor="middle" fill="#fef3c7" font-size="12" font-family="monospace">mongo-root-username = root</text>
+    <text x="860" y="582" text-anchor="middle" fill="#fef3c7" font-size="12" font-family="monospace">mongo-root-password = pass</text>
+  </g>
+
+  <!-- Connection: ConfigMap -> Pod 2 -->
+  <line x1="720" y1="380" x2="658" y2="380" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+
+  <!-- Connection: Secret -> Pod 1 & Pod 2 -->
+  <path d="M 720 550 L 240 550 L 240 478" fill="none" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+  <line x1="530" y1="550" x2="530" y2="478" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+  <circle cx="530" cy="550" r="4.5" fill="#94a3b8"/>
+</svg>
